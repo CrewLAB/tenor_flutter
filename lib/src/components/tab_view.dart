@@ -14,9 +14,7 @@ const featuredCategoryPath = '##trending-gifs';
 class TenorTabViewStyle {
   final Color mediaBackgroundColor;
 
-  const TenorTabViewStyle({
-    this.mediaBackgroundColor = Colors.white,
-  });
+  const TenorTabViewStyle({this.mediaBackgroundColor = Colors.white});
 }
 
 class TenorTabView extends StatefulWidget {
@@ -31,7 +29,8 @@ class TenorTabView extends StatefulWidget {
     String? pos,
     int limit,
     TenorCategory? category,
-  )? onLoad;
+  )?
+  onLoad;
   final Function(TenorResult? gif)? onSelected;
   final bool showCategories;
   final TenorTabViewStyle style;
@@ -138,9 +137,14 @@ class _TenorTabViewState extends State<TenorTabView>
   }
 
   void getCount() {
+    // Use the render box width so column count is relative to the actual
+    // container (e.g. a Dialog), not the full screen/browser viewport.
+    final double width =
+        (context.findRenderObject() as RenderBox?)?.size.width ??
+        MediaQuery.of(context).size.width;
+
     // Set items count responsive
-    _crossAxisCount =
-        (MediaQuery.of(context).size.width / widget.mediaWidth).round();
+    _crossAxisCount = (width / widget.mediaWidth).round();
 
     // Set vertical max items count
     int mainAxisCount =
@@ -164,9 +168,7 @@ class _TenorTabViewState extends State<TenorTabView>
   Widget build(BuildContext context) {
     super.build(context);
     if (_list.isEmpty && _categories.isEmpty) {
-      return const Center(
-        child: CircularProgressIndicator(),
-      );
+      return const Center(child: CircularProgressIndicator());
     }
 
     if (_appBarProvider.queryText.isEmpty &&
@@ -205,10 +207,10 @@ class _TenorTabViewState extends State<TenorTabView>
             // Add safe area padding if `TenorAttributionType.poweredBy` is disabled
             padding:
                 _tabProvider.attributionType == TenorAttributionType.poweredBy
-                    ? null
-                    : EdgeInsets.only(
-                        bottom: MediaQuery.of(context).padding.bottom,
-                      ),
+                ? null
+                : EdgeInsets.only(
+                    bottom: MediaQuery.of(context).padding.bottom,
+                  ),
             scrollDirection: _scrollDirection,
           ),
         ),
@@ -227,9 +229,7 @@ class _TenorTabViewState extends State<TenorTabView>
           borderRadius: BorderRadius.circular(8),
           child: TenorSelectableGif(
             backgroundColor: widget.style.mediaBackgroundColor,
-            onTap: (selectedResult) => _selectedGif(
-              selectedResult,
-            ),
+            onTap: (selectedResult) => _selectedGif(selectedResult),
             result: _list[idx],
           ),
         ),
@@ -238,9 +238,7 @@ class _TenorTabViewState extends State<TenorTabView>
         // Add safe area padding if `TenorAttributionType.poweredBy` is disabled
         padding: _tabProvider.attributionType == TenorAttributionType.poweredBy
             ? null
-            : EdgeInsets.only(
-                bottom: MediaQuery.of(context).padding.bottom,
-              ),
+            : EdgeInsets.only(bottom: MediaQuery.of(context).padding.bottom),
         scrollDirection: _scrollDirection,
       ),
     );
@@ -333,7 +331,8 @@ class _TenorTabViewState extends State<TenorTabView>
   // Scroll listener. if scroll end load more gifs
   void _scrollListener() {
     // trending-gifs, etc
-    final customCategorySelected = _appBarProvider.selectedCategory != null &&
+    final customCategorySelected =
+        _appBarProvider.selectedCategory != null &&
         _appBarProvider.queryText == '';
 
     if (customCategorySelected ||
