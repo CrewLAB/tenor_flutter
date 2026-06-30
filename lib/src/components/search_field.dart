@@ -18,10 +18,7 @@ class TenorSelectedCategoryStyle {
 
   const TenorSelectedCategoryStyle({
     this.height = 52,
-    this.padding = const EdgeInsets.only(
-      left: 14,
-      top: 1,
-    ),
+    this.padding = const EdgeInsets.only(left: 14, top: 1),
     this.icon = const Icon(
       Icons.arrow_back_ios_new,
       size: 15,
@@ -100,16 +97,13 @@ class _TenorSearchFieldState extends State<TenorSearchField> {
     _appBarProvider.addListener(_listenerQuery);
 
     // Set Texfield Controller
-    _textEditingController = widget.searchFieldController ??
-        TextEditingController(
-          text: _appBarProvider.queryText,
-        );
+    _textEditingController =
+        widget.searchFieldController ??
+        TextEditingController(text: _appBarProvider.queryText);
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
       // Establish the debouncer
-      final debouncer = TenorDebouncer(
-        delay: _appBarProvider.debounce,
-      );
+      final debouncer = TenorDebouncer(delay: _appBarProvider.debounce);
 
       // Listener TextField
       _textEditingController.addListener(() {
@@ -218,7 +212,8 @@ class _TenorSearchFieldState extends State<TenorSearchField> {
                       padding: const EdgeInsets.all(8),
                       child: Icon(
                         Icons.clear,
-                        color: widget.style.hintStyle.color ??
+                        color:
+                            widget.style.hintStyle.color ??
                             const Color(0xFF8A8A86),
                         size: 20,
                       ),
@@ -236,7 +231,7 @@ class _TenorSearchFieldState extends State<TenorSearchField> {
   }
 
   void _onFocusChange(AnimationStyle? animationStyle) {
-    if (_focus.hasFocus) {
+    if (_focus.hasFocus && _sheetProvider.scrollController.isAttached) {
       // when they focus the input, maximize viewing space
       _sheetProvider.scrollController.animateTo(
         _sheetProvider.maxExtent,

@@ -7,6 +7,7 @@ export 'src/components/attribution.dart' show TenorAttributionStyle;
 export 'src/components/drag_handle.dart' show TenorDragHandleStyle;
 export 'src/components/search_field.dart'
     show TenorSelectedCategoryStyle, TenorSearchFieldStyle;
+export 'src/components/picker_body.dart' show TenorPickerBody;
 export 'src/components/sheet.dart' show TenorSheet;
 export 'src/components/tab_bar.dart' show TenorTabBarStyle;
 export 'src/components/tab_view.dart' show TenorTabView, TenorTabViewStyle;
