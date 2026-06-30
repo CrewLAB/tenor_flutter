@@ -1,0 +1,27 @@
+name: cl_tenor_flutter
+version: 0.0.6
+description: CrewLAB fork of tenor_flutter — opinionated Flutter package for searching and selecting GIFs/Stickers from the Tenor GIF search API.
+publish_to: none
+
+resolution: workspace
+
+environment:
+  sdk: ">=2.17.0 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  provider: ^6.1.2
+  flutter_staggered_grid_view: ^0.7.0
+  extended_image: ^8.3.1
+  tenor_dart: ^0.0.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0
+  mocktail: ^1.0.4
+
+flutter:
+  assets:
+    - assets/
