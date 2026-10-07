@@ -244,6 +244,9 @@ class _TenorSearchFieldState extends State<TenorSearchField> {
 
   // listener query
   void _listenerQuery() {
-    _textEditingController.text = _appBarProvider.queryText;
+    // Reassigning identical text resets the cursor and composing range, which drops keystrokes typed meanwhile.
+    if (_textEditingController.text != _appBarProvider.queryText) {
+      _textEditingController.text = _appBarProvider.queryText;
+    }
   }
 }
